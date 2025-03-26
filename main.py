@@ -34,13 +34,17 @@ def solution(n:int, m:int) -> float:
         if (n in permutation[:m]):
             continue
 
-        i = m
-        while (permutation[m - 1] < permutation[i]):
-            if (permutation[i] == n):
+        last_waiting_day:int = permutation[m - 1]
+        for i in range(m, n):
+            current_day:int = permutation[i]
+
+            if (current_day == n):
                 result += 1
                 break
-
-            i += 1
+            elif (current_day > last_waiting_day):
+                break
+            else:
+                continue
 
     return result / len(permutations)
 
@@ -49,7 +53,7 @@ def main() -> None:
     m:int = int(input("Введите кол-во дней для обязательного ожидания: "))
 
     result:float = solution(n, m)
-    print(f"Вероятность продажи по максимальной цене: {result}")
+    print("Вероятность продажи по максимальной цене:", result)
 
 if (__name__ == "__main__"):
     main()
