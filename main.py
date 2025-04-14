@@ -1,4 +1,7 @@
-def permutations(elements:list, n:int):
+from typing import Generator
+
+
+def permutations(elements:list, n:int) -> Generator[list, list, list]:
     """Алгоритм Хипа"""
     yield elements.copy()
 
