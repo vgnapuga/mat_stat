@@ -1,9 +1,10 @@
 import os
+import math
 
 from typing import Generator
 
 
-def permutations(elements:list, n:int) -> Generator[list, list, list]:
+def permutations(elements:list, n:int) -> Generator[list[int], None, None]:
     """Алгоритм Хипа"""
     yield elements.copy()
 
@@ -39,6 +40,7 @@ def solution(n:int, m:int) -> float:
 
     for permutation in permutations:
         days_to_wait:list[int] = permutation[:m]
+        max_from_days_to_wait:int = max(days_to_wait)
 
         if (n in days_to_wait):
             continue
@@ -51,12 +53,12 @@ def solution(n:int, m:int) -> float:
                 result += 1
                 break
             elif (current_day > last_waiting_day):
-                if (current_day < max(days_to_wait)):
+                if (current_day < max_from_days_to_wait):
                     continue
 
                 break
 
-    return result / len(permutations)
+    return round(result / len(permutations), 3)
 
 
 def main() -> None:
