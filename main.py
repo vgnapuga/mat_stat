@@ -1,30 +1,31 @@
 import os
 import math
+from itertools import permutations
 
 from typing import Generator
 
 
-def permutations(elements:list, n:int) -> Generator[list[int], None, None]:
-    """Алгоритм Хипа"""
-    yield elements.copy()
+# def permutations(elements:list, n:int) -> Generator[list[int], None, None]:
+#     """Алгоритм Хипа"""
+#     yield elements.copy()
 
-    c:list[int] = [0] * n
-    i = 0
+#     c:list[int] = [0] * n
+#     i = 0
 
-    while (i < n):
-        if (c[i] < i):
-            if (i % 2 == 0):
-                elements[0], elements[i] = elements[i], elements[0]
-            else:
-                elements[c[i]], elements[i] = elements[i], elements[c[i]]
+#     while (i < n):
+#         if (c[i] < i):
+#             if (i % 2 == 0):
+#                 elements[0], elements[i] = elements[i], elements[0]
+#             else:
+#                 elements[c[i]], elements[i] = elements[i], elements[c[i]]
 
-            yield elements.copy()
+#             yield elements.copy()
 
-            c[i] += 1
-            i = 0
-        else:
-            c[i] = 0
-            i += 1
+#             c[i] += 1
+#             i = 0
+#         else:
+#             c[i] = 0
+#             i += 1
 
 
 def solution(n:int, m:int) -> float:
@@ -60,10 +61,10 @@ def main() -> None:
     os.system("clear")
 
     n:int = int(input("Введите общее кол-во дней: "))
-    m:int = int(input("Введите кол-во дней для обязательного ожидания: "))
 
-    result:float = solution(n, m)
-    print("Вероятность продажи по максимальной цене:", result)
+    for i in range(1, n):
+        result:float = solution(n, i)
+        print(f"Вероятность при {i} днях ожидания:", result)
 
 
 if (__name__ == "__main__"):
