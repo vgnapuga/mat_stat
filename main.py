@@ -11,7 +11,7 @@ def permutations(elements:list, n:int) -> Generator[list[int], None, None]:
     c:list[int] = [0] * n
     i = 0
 
-    while i < n:
+    while (i < n):
         if (c[i] < i):
             if (i % 2 == 0):
                 elements[0], elements[i] = elements[i], elements[0]
@@ -27,18 +27,13 @@ def permutations(elements:list, n:int) -> Generator[list[int], None, None]:
             i += 1
 
 
-def calculate_permutations(n:int) -> list[int]:
-    days:list[int] = [day for day in range(1, n + 1)]
-
-    all_permutations:list[int] = list(permutations(days, n))
-    return all_permutations
-
-
 def solution(n:int, m:int) -> float:
-    permutations:list[int] = calculate_permutations(n)
+    days:list[int] = [day for day in range(1, n + 1)]
+    length:int = 0
     result:int = 0
 
-    for permutation in permutations:
+    for permutation in permutations(days, n):
+        length += 1
         days_to_wait:list[int] = permutation[:m]
         max_from_days_to_wait:int = max(days_to_wait)
 
@@ -58,7 +53,7 @@ def solution(n:int, m:int) -> float:
 
                 break
 
-    return round(result / len(permutations), 3)
+    return round(result / length, 3)
 
 
 def main() -> None:
